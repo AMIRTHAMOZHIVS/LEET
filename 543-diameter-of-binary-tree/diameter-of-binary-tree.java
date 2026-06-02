@@ -30,5 +30,6 @@ public class Solution {
         max = Math.max(max, left + right);
         
         return Math.max(left, right) + 1;
+        
     }
 }
