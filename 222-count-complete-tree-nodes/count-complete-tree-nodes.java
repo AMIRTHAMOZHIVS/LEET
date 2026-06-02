@@ -14,12 +14,22 @@
  * }
  */
 class Solution {
+    int c=0;
     public int countNodes(TreeNode root) {
-        if (root == null) {
-            return 0;
+        
+        traverse(root);
+        return c;
+    }
+   
+    private void traverse(TreeNode node) {
+        if (node == null) {
+            return;
         }
-
-        return 1 + countNodes(root.left) + countNodes(root.right);
+       
+        // Root -> Left -> Right
+        c++;
+        traverse(node.left);
+        traverse(node.right);
     }
 }
 
