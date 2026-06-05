@@ -1,23 +1,20 @@
 class Solution {
     public int numEnclaves(int[][] grid) {
-        int m = grid.length;
-        int n = grid[0].length;
 
-        // Remove boundary-connected lands
-        for (int i = 0; i < m; i++) {
+        for (int i = 0; i < grid.length; i++) {
             dfs(grid, i, 0);
-            dfs(grid, i, n - 1);
+            dfs(grid, i, grid[0].length - 1);
         }
 
-        for (int j = 0; j < n; j++) {
+        for (int j = 0; j < grid[0].length; j++) {
             dfs(grid, 0, j);
-            dfs(grid, m - 1, j);
+            dfs(grid, grid.length- 1, j);
         }
 
         int count = 0;
 
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[0].length; j++) {
                 if (grid[i][j] == 1)
                     count++;
             }
