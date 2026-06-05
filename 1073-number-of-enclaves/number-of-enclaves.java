@@ -1,40 +1,68 @@
+import java.util.*;
+
 class Solution {
     public int numEnclaves(int[][] grid) {
+        int m = grid.length;
+        int n = grid[0].length;
 
-        for (int i = 0; i < grid.length; i++) {
-            dfs(grid, i, 0);
-            dfs(grid, i, grid[0].length - 1);
+        Queue<int[]> q = new LinkedList<>();
+
+        // Add all boundary lands to queue
+        for (int i = 0; i < m; i++) {
+            if (grid[i][0] == 1) {
+                q.offer(new int[]{i, 0});
+                grid[i][0] = 0;
+            }
+
+            if (grid[i][n - 1] == 1) {
+                q.offer(new int[]{i, n - 1});
+                grid[i][n - 1] = 0;
+            }
         }
 
-        for (int j = 0; j < grid[0].length; j++) {
-            dfs(grid, 0, j);
-            dfs(grid, grid.length- 1, j);
+        for (int j = 0; j < n; j++) {
+            if (grid[0][j] == 1) {
+                q.offer(new int[]{0, j});
+                grid[0][j] = 0;
+            }
+
+            if (grid[m - 1][j] == 1) {
+                q.offer(new int[]{m - 1, j});
+                grid[m - 1][j] = 0;
+            }
+        }
+
+        int[] dr = {-1, 1, 0, 0};
+        int[] dc = {0, 0, -1, 1};
+
+        while (!q.isEmpty()) {
+            int[] curr = q.poll();
+            int r = curr[0];
+            int c = curr[1];
+
+            for (int k = 0; k < 4; k++) {
+                int nr = r + dr[k];
+                int nc = c + dc[k];
+
+                if (nr >= 0 && nr < m &&
+                    nc >= 0 && nc < n &&
+                    grid[nr][nc] == 1) {
+
+                    q.offer(new int[]{nr, nc});
+                    grid[nr][nc] = 0;
+                }
+            }
         }
 
         int count = 0;
 
-        for (int i = 0; i < grid.length; i++) {
-            for (int j = 0; j < grid[0].length; j++) {
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
                 if (grid[i][j] == 1)
                     count++;
             }
         }
 
         return count;
-    }
-
-    private void dfs(int[][] grid, int i, int j) {
-        int m = grid.length;
-        int n = grid[0].length;
-
-        if (i < 0 || j < 0 || i >= m || j >= n || grid[i][j] == 0)
-            return;
-
-        grid[i][j] = 0;
-
-        dfs(grid, i + 1, j);
-        dfs(grid, i - 1, j);
-        dfs(grid, i, j + 1);
-        dfs(grid, i, j - 1);
     }
 }
