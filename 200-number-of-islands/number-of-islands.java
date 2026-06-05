@@ -10,7 +10,7 @@ class Solution {
      return count;
     }
     int sink(char[][]grid,int i,int j){
-        if(i<0||j<0||i==grid.length||j==grid[i].length||grid[i][j]=='0'){
+        if(i<0||j<0||i>=grid.length||j>=grid[i].length||grid[i][j]=='0'){
             return 0;
         }
         grid[i][j]='0';
@@ -18,6 +18,7 @@ class Solution {
         sink(grid,i,j+1);
         sink(grid,i-1,j);
         sink(grid,i+1,j);
-        return 1;}
+        return 1;
+        }
 
 }
