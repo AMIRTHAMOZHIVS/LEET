@@ -6,8 +6,6 @@ class Solution {
         int n = grid[0].length;
 
         Queue<int[]> q = new LinkedList<>();
-
-        // Add all boundary lands to queue
         for (int i = 0; i < m; i++) {
             if (grid[i][0] == 1) {
                 q.offer(new int[]{i, 0});
