@@ -7,14 +7,13 @@ public class Solution {
             return;
         }
         for (int i = begin; i < nums.length; i++) {
-            // Swap
+            
             int temp = nums[begin];
             nums[begin] = nums[i];
             nums[i] = temp;
             
             permuteRec(nums, begin + 1, result);
             
-            // Swap back
             temp = nums[begin];
             nums[begin] = nums[i];
             nums[i] = temp;
