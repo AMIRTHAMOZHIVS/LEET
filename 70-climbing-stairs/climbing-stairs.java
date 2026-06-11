@@ -1,13 +1,19 @@
 class Solution {
     public int climbStairs(int n) {
-        int n1=1,n2=2,sum=0;
-    if(n<=3){
-        return n;
+        int[] dp = new int[n + 1];
+        return fib(n, dp);
     }
-    for(int i=3;i<=n;i++){
-        sum=n1+n2;
-        n1=n2;
-        n2=sum;    }
-    return sum;
+
+    public int fib(int n, int[] dp) {
+        if (n <= 3) {
+            return n;
+        }
+
+        if (dp[n] != 0) {
+            return dp[n];
+        }
+
+        dp[n] = fib(n - 1, dp) + fib(n - 2, dp);
+        return dp[n];
     }
 }
