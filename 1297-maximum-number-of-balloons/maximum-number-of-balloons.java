@@ -16,8 +16,6 @@ class Solution {
                 case 'n': n++; break;
             }
         }
-
-
         return Math.min(b,Math.min(a,Math.min(n,Math.min(l/2,o/2))));
     }
 }
